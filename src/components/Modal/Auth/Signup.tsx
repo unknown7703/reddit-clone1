@@ -97,9 +97,9 @@ const Signup: React.FC = () => {
         bg="gray.50"
         onChange={onChange}
       />
-      {/* <Text align="center" color="red">
+      <Text align="center" color="red">
         error text{" "}
-      </Text> */}
+      </Text>
       <Button type="submit" height="36px" mb={2} width="100%" mt={2}>
         Sign Up
       </Button>
