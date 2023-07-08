@@ -5,16 +5,16 @@ import AuthModal from '../../Modal/Auth/AuthModal';
 
 
 type RightContentProps = {
-    //user: any;
+    user: any;
 };
 
-const RightContent:React.FC<RightContentProps> = () => {
+const RightContent:React.FC<RightContentProps> = ({user}) => {
     
     return (
         <>
         <AuthModal/>
         <Flex justify="center" align="center">
-            <AuthButtons/>
+           {user ? <div>Logged In </div> : <AuthButtons/>}
         </Flex>
         </>
     )

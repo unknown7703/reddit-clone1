@@ -1,11 +1,11 @@
-
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import { authModalState } from "../../../atoms/authModalAtom";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "../../../firebase/clientApp";
 
+import { auth } from "../../../firebase/clientApp";
+import { FIREBASE_ERRORS } from "../../../firebase/errors";
 const Signup: React.FC = () => {
   const [signUpForm, setsignUpForm] = useState({
     email: " ",
@@ -19,12 +19,19 @@ const Signup: React.FC = () => {
     useCreateUserWithEmailAndPassword(auth);
   //firebase end
 
-  const onSubmit = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (error) setError("");
+    if(userError) userError.message='';
+    if (signUpForm.password.length < 6) {
+      setError("password too small");
+      return;
+    }
     if (signUpForm.password !== signUpForm.confirmpassword) {
       setError("password do not match !");
       return;
     }
-    createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
+    createUserWithEmailAndPassword(signUpForm.email,signUpForm.password);
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setsignUpForm((prev) => ({
@@ -79,7 +86,7 @@ const Signup: React.FC = () => {
       />
       <Input
         required
-        name="confirm-password"
+        name="confirmpassword"
         placeholder="confirm - password"
         type="password"
         mb={2}
@@ -97,10 +104,17 @@ const Signup: React.FC = () => {
         bg="gray.50"
         onChange={onChange}
       />
-      <Text align="center" color="red">
-        error text{" "}
-      </Text>
-      <Button type="submit" height="36px" mb={2} width="100%" mt={2}>
+      {(error || userError) && (
+        <Text align="center" color="red">
+          {error ||FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS] }
+        </Text>
+      )}
+       {/* {userError && (
+        <Text align="center" color="red">
+          {FIREBASE_ERRORS[userError.message as keyof typeof FIREBASE_ERRORS]}
+        </Text>
+      )} */}
+      <Button type="submit" height="36px" mb={2} width="100%" mt={2} isLoading={loading}>
         Sign Up
       </Button>
       <Flex fontSize="9pt">
