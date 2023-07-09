@@ -16,23 +16,23 @@ import { useRecoilState } from "recoil";
 import { authModalState } from "@/src/atoms/authModalAtom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import AuthInputs from "./AuthInputs";
-import OAuthButtons from "./OAuthButtons"
+import ResetPassword from "./ResetPassword";
+import OAuthButtons from "./OAuthButtons";
 import { auth } from "@/src/firebase/clientApp";
 
 const AuthModal: React.FC = () => {
   const [modalState, setModalState] = useRecoilState(authModalState);
-  const[user,loading,error]=useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   const handleClose = () => {
     setModalState((prev) => ({
       ...prev,
       open: false,
     }));
   };
-useEffect(() => {
- if(user) handleClose();
- console.log("user",user);
-}, [user]);
-
+  useEffect(() => {
+    if (user) handleClose();
+    console.log("user", user);
+  }, [user]);
 
   return (
     <>
@@ -59,10 +59,17 @@ useEffect(() => {
               width="70%"
               // border="1px solid red"
             >
-              <OAuthButtons/>
-              <Text color="gray.500" fontWeight="700" fontSize="10pt">OR</Text>
-              <AuthInputs/>
-              {/* <ResetPassword/> */}
+              {modalState.view === "login" || modalState.view === "signup" ? (
+                <>
+                  <OAuthButtons />
+                  <Text color="gray.500" fontWeight="700" fontSize="10pt">
+                    OR
+                  </Text>
+                  <AuthInputs />
+                </>
+              ) : (
+                <ResetPassword />
+              )}
             </Flex>
           </ModalBody>
         </ModalContent>
