@@ -21,7 +21,9 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   return (
     <>
       <Modal isOpen={open} onClose={handleClose}>
-        <ModalOverlay />
+        <ModalOverlay 
+         bg='orange.400'
+         backdropFilter='blur(10px) hue-rotate(90deg)'/>
         <ModalContent>
           <ModalHeader>Create Community</ModalHeader>
           <ModalCloseButton />
