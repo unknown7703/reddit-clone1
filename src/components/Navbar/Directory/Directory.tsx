@@ -1,7 +1,7 @@
 import { Flex, Icon, Menu, MenuButton, MenuList,Text } from "@chakra-ui/react";
 import React from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { GoHome } from "react-icons/go";
+import { GoHomeFill } from "react-icons/go";
 import Communities from "./Communities"
 const Directory: React.FC = () => {
   return (
@@ -16,9 +16,9 @@ const Directory: React.FC = () => {
       >
         <Flex align="center">
           <Flex align="center">
-            <Icon as={GoHome} fontSize={20} mr={{base:1,md:2}}/>
+            <Icon as={GoHomeFill} fontSize={20} mr={{base:1,md:2}}/>
             <Flex display={{base:"none",lg:"flex"}}>
-            <Text>Home</Text>
+            <Text mr={{base:1,md:5}}>Home</Text>
             </Flex>
             <ChevronDownIcon />
           </Flex>

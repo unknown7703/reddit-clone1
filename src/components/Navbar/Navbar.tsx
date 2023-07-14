@@ -9,9 +9,9 @@ import Directory from "./Directory/Directory"
 const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   return (
-    <Flex bg="white" height="44px" padding="6px 12px" justifyContent={{md:"space-between"}}>
+    <Flex bg="white" height="47px" padding="6px 12px" justifyContent={{md:"space-between"}}>
       <Flex align="center" width={{base:"40px" ,md:"auto"}} mr={{base:0,md:2}}>
-        <Image src="/images/redditface.svg" height="30px" mr={{base:1.5,md:1}}/>
+        <Image src="/images/redditface.svg" height="25px" ml={{base:0,md:2}} mr={{base:1.5,md:1}}/>
         <Image
           src="/images/reddittext.svg"
           height="46px"
